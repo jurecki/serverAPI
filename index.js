@@ -103,8 +103,51 @@ app.delete('/concerts/:id', (req, res) => {
     res.send({ message: 'OK' });
 })
 
-// endpoint for concerts
+// endpoint for seats
+app.get('/seats', (req, res) => {
+    res.json(db.seats);
+})
 
+app.get('/seats/:id', (req, res) => {
+    const id = parseInt(req.params.id) - 1;
+    res.json(db.seats[id]);
+})
+
+app.post('/seats', (req, res) => {
+    db.seats.push({
+        id: db.seats.length + 1,
+        day: req.body.day,
+        seat: req.body.seat,
+        client: req.body.client,
+        email: req.body.email,
+    })
+    res.send({ message: 'OK' });
+})
+
+app.put('/seats/:id', (req, res) => {
+    const id = parseInt(req.params.id);
+
+    db.seats.forEach((item, i) => {
+        if (item.id === id)
+            db.seats[i] = {
+                id: id,
+                day: req.body.day,
+                seat: req.body.seat,
+                client: req.body.client,
+                email: req.body.email,
+            };
+
+        res.send({ message: 'OK' });
+    })
+})
+
+app.delete('/seats/:id', (req, res) => {
+    const id = parseInt(req.params.id);
+
+    db.seats.splice(db.seats.findIndex(item => item.id === id), 1);
+
+    res.send({ message: 'OK' });
+})
 
 // catch error link
 app.use((req, res) => {

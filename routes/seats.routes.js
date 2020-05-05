@@ -15,14 +15,20 @@ router.route('/seats/:id').get((req, res) => {
 })
 
 router.route('/seats').post((req, res) => {
-    db.seats.push({
-        id: db.seats.length + 1,
-        day: req.body.day,
-        seat: req.body.seat,
-        client: req.body.client,
-        email: req.body.email,
-    })
-    res.send({ message: 'OK' });
+    const checkSeats = db.seats.some(x => x.day === req.body.day && x.seat === req.body.seat)
+    if (!checkSeats) {
+        db.seats.push({
+            id: db.seats.length + 1,
+            day: req.body.day,
+            seat: req.body.seat,
+            client: req.body.client,
+            email: req.body.email,
+        })
+        res.send({ message: 'OK' });
+    } else {
+        res.send({ message: "The slot is already taken..." });
+    }
+
 })
 
 router.route('/seats/:id').put((req, res) => {

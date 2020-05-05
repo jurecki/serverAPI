@@ -68,7 +68,7 @@ class OrderTicketForm extends React.Component {
     const { order, isError } = this.state;
 
     return (
-      <Form className="order-ticket-form" onSubmit={submitForm}>
+      <Form className="order-ticket-form" onSubmit={submitForm} action='/api/seats' method="POST">
         <Row>
           <Col xs="12" md="6">
             {(isError) && <Alert color="warning">There are some errors in you form. Have you fill all the fields? Maybe you forgot to choose your seat?</Alert>}

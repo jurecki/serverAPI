@@ -1,6 +1,5 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
-
 import MainLayout from './components/layout/MainLayout/MainLayout';
 
 // import routes
@@ -10,6 +9,7 @@ import Prices from './components/pages/Prices/PricesPage';
 import Order from './components/pages/Order/OrderPage.js';
 
 class App extends React.Component {
+ 
 
   render() {
     return (

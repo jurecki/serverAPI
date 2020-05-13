@@ -7,7 +7,8 @@ const db = require('../db');
 // endpoint for seats
 router.route('/seats').get((req, res) => {
     res.json(db.seats);
-})
+}
+)
 
 router.route('/seats/:id').get((req, res) => {
     const id = parseInt(req.params.id) - 1;
@@ -24,6 +25,9 @@ router.route('/seats').post((req, res) => {
             client: req.body.client,
             email: req.body.email,
         })
+
+        req.io.emit('seatsUpdated', db.seats)
+
         res.send({ message: 'OK' });
     } else {
         res.send({ message: "The slot is already taken..." });

@@ -2,55 +2,13 @@
 
 const express = require('express');
 const router = express.Router();
-const db = require('./../db');
+const ConcertController = require('../controllers/concerts.controller');
 
 // endpoint for concerts
-
-router.route('/concerts').get((req, res) => {
-    res.json(db.concerts);
-})
-
-router.route('/concerts/:id').get((req, res) => {
-    const id = parseInt(req.params.id) - 1;
-    res.json(db.concerts[id]);
-})
-
-router.route('/concerts').post((req, res) => {
-    db.concerts.push({
-        id: db.concerts.length + 1,
-        performer: req.body.performer,
-        genre: req.body.genre,
-        price: req.body.price,
-        day: req.body.day,
-        image: req.body.image,
-    })
-    res.send({ message: 'OK' });
-})
-
-router.route('/concerts/:id').put((req, res) => {
-    const id = parseInt(req.params.id);
-
-    db.concerts.forEach((item, i) => {
-        if (item.id === id)
-            db.concerts[i] = {
-                id: id,
-                performer: req.body.performer,
-                genre: req.body.genre,
-                price: req.body.price,
-                day: req.body.day,
-                image: req.body.image,
-            };
-
-        res.send({ message: 'OK' });
-    })
-})
-
-router.route('/concerts/:id').delete((req, res) => {
-    const id = parseInt(req.params.id);
-
-    db.concerts.splice(db.concerts.findIndex(item => item.id === id), 1);
-
-    res.send({ message: 'OK' });
-})
+router.get('/concerts', ConcertController.getAll);
+router.get('/concerts/:id', ConcertController.getById);
+router.post('/concerts', ConcertController.add);
+router.put('/concerts/:id', ConcertController.updateOne);
+router.delete('/concerts/:id', ConcertController.delete);
 
 module.exports = router;

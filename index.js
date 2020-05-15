@@ -26,7 +26,7 @@ app.use('/api', seatsRoutes);// add seatsRoutes routes to server
 app.use(express.static(path.join(__dirname, '/client/build')));
 
 // connects our backend code with the database
-mongoose.connect('mongodb+srv://' + 'admin' + ':' + 'admin232' + '@cluster0-qe9yg.mongodb.net/test?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect('mongodb+srv://admin:admin232@cluster0-qe9yg.mongodb.net/NewWaveDB?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true });
 const db = mongoose.connection;
 
 db.once('open', () => {

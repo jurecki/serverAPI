@@ -11,6 +11,6 @@ router.get('/testimonials/random', TestimonialController.getRandom);
 router.get('/testimonials/:id', TestimonialController.getById);
 router.post('/testimonials', TestimonialController.add);
 router.put('/testimonials/:id', TestimonialController.updateOne);
-router.delete('/contestimonialscerts/:id', TestimonialController.delete);
+router.delete('/testimonials/:id', TestimonialController.delete);
 
 module.exports = router;

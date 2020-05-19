@@ -22,6 +22,8 @@ app.use('/api', testimonialsRoutes); // add testimonialsRoutes routes to server
 app.use('/api', concertsRoutes);// add concertsRoutes routes to server
 app.use('/api', seatsRoutes);// add seatsRoutes routes to server
 
+
+
 // Serve static files from the React app
 app.use(express.static(path.join(__dirname, '/client/build')));
 
@@ -31,6 +33,7 @@ const db = mongoose.connection;
 
 db.once('open', () => {
     console.log('Connected to the database');
+    console.log(process.env)
 });
 db.on('error', err => console.log('Error ' + err));
 
@@ -47,6 +50,8 @@ app.use((req, res) => {
 const server = app.listen(process.env.PORT || 8000, () => {
     console.log('Server is running on port: 8000');
 });
+
+module.exports = server;
 
 const io = socket(server);
 

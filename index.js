@@ -4,6 +4,7 @@ const cors = require('cors');
 const path = require('path');
 const socket = require('socket.io');
 const mongoose = require('mongoose');
+const helmet = require('helmet');
 
 //import routes
 const testimonialsRoutes = require('./routes/testimonials.routes')
@@ -11,6 +12,7 @@ const concertsRoutes = require('./routes/concerts.routes')
 const seatsRoutes = require('./routes/seats.routes')
 
 //middleware to use for all request
+app.use(helmet());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(cors());
@@ -33,7 +35,6 @@ const db = mongoose.connection;
 
 db.once('open', () => {
     console.log('Connected to the database');
-    console.log(process.env)
 });
 db.on('error', err => console.log('Error ' + err));
 

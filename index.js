@@ -28,10 +28,13 @@ app.use('/api', seatsRoutes);// add seatsRoutes routes to server
 
 // Serve static files from the React app
 app.use(express.static(path.join(__dirname, '/client/build')));
-
+console.log(process.env.PORT)
 // connects our backend code with the database
 
-mongoose.connect('mongodb+srv://' + process.env.user + ':' + process.env.password + '@cluster0-qe9yg.mongodb.net/NewWaveDB?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true });
+process.env.NODE_ENV === 'production' ?
+    mongoose.connect('mongodb+srv://' + user + ':' + password + '@cluster0-qe9yg.mongodb.net/NewWaveDB?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true }) :
+    mongoose.connect('mongodb+srv://' + process.env.user + ':' + process.env.password + '@cluster0-qe9yg.mongodb.net/NewWaveDB?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true });
+
 const db = mongoose.connection;
 
 db.once('open', () => {

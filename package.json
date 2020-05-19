@@ -6,7 +6,7 @@
   "scripts": {
     "start": "nodemon index.js",
     "build": "cd client && yarn install && yarn build",
-    "test": "mocha \"./{,!(node_modules)/**/}*.test.js\""
+    "test": "mocha ./test/api/concerts/get.test.js"
   },
   "repository": {
     "type": "git",
@@ -20,15 +20,16 @@
   "homepage": "https://github.com/jurecki/serverAPI#readme",
   "dependencies": {
     "chai": "4.2.0",
+    "chai-http": "^4.3.0",
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "helmet": "3.21.1",
     "mocha": "6.2.1",
     "mongo-sanitize": "1.0.1",
     "mongoose": "5.7.1",
+    "nodemon": "^1.19.4",
     "socket.io": "^2.3.0",
-    "uuid": "^8.0.0",
-    "nodemon": "^1.19.4"
+    "uuid": "^8.0.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.4"

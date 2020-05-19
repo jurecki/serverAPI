@@ -3,13 +3,13 @@ const chaiHttp = require('chai-http');
 const Concert = require('../../../models/concert.model');
 
 chai.use(chaiHttp);
-const server = require('../../../server');
+const server = require('../../../index');
 const expect = chai.expect;
 const request = chai.request;
 
 describe('GET /api/concerts', () => {
     before(async () => {
-        const testConOne = new Concert({ _id: '5d9f1140f10a81216cfd4408', performer: 'John Doe', genre: 'Rock', price: '25', day: '1', image: '/img/uploads/1fsd324fsdg.jpg' });
+        const testConOne = new Concert({ _id: '5d9f1140f10a81216cfd4408', performer: 'Doe', genre: 'Rock', price: '25', day: '1', image: '/img/uploads/1fsd324fsdg.jpg' });
         await testConOne.save();
 
         const testConTwo = new Concert({ _id: '5d9f1159f81ce8d1ef2bee48', performer: 'Rebekah Parker', genre: 'R&B', price: '25', day: '1', image: '/img/uploads/1fsd324fsdg.jpg' });
@@ -32,16 +32,16 @@ describe('GET /api/concerts', () => {
     });
 
     it('/ should return concerts by performer name', async () => {
-        const res = await request(server).get('/api/concerts/performer/performerName');
+        const res = await request(server).get('/api/concerts/performer/Doe');
         expect(res.status).to.be.equal(200);
-        expect(res.body).to.be.an('object');
+        expect(res.body).to.be.an('array');
         expect(res.body).to.not.be.null;
     });
 
     it('/ should return concerts by genre', async () => {
-        const res = await request(server).get('/api/concerts/genre/genreName');
+        const res = await request(server).get('/api/concerts/genre/Rock');
         expect(res.status).to.be.equal(200);
-        expect(res.body).to.be.an('object');
+        expect(res.body).to.be.an('array');
         expect(res.body).to.not.be.null;
 
     });
@@ -54,7 +54,7 @@ describe('GET /api/concerts', () => {
     });
 
     it('/ should return concerts by day', async () => {
-        const res = await request(server).get('/api/concerts/day/dayName');
+        const res = await request(server).get('/api/concerts/day/1');
         expect(res.status).to.be.equal(200);
         expect(res.body).to.be.an('array');
         expect(res.body.length).to.be.equal(2);

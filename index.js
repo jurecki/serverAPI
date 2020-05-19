@@ -30,10 +30,7 @@ app.use('/api', seatsRoutes);// add seatsRoutes routes to server
 app.use(express.static(path.join(__dirname, '/client/build')));
 
 // connects our backend code with the database
-console.log('procvess', process.env.NODE_ENV)
-process.env.NODE_ENV === 'production' ?
-    mongoose.connect('mongodb+srv://' + user + ':' + password + '@cluster0-qe9yg.mongodb.net/NewWaveDB?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true }) :
-    mongoose.connect('mongodb+srv://' + process.env.user + ':' + process.env.password + '@cluster0-qe9yg.mongodb.net/NewWaveDB?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect('mongodb+srv://' + 'admin' + ':' + 'admin232' + '@cluster0-qe9yg.mongodb.net/NewWaveDB?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true });
 
 const db = mongoose.connection;
 

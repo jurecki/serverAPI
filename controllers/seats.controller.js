@@ -29,8 +29,9 @@ exports.add = async (req, res) => {
         const email = sanitize(req.body.email);
         const newSeat = new Seat({ day: day, seat: seat, client: client, email: email })
         await newSeat.save();
-        req.io.emit('seatsUpdated', db.seats)
+
         res.json({ message: 'OK' })
+        req.io.emit('seatsUpdated', db.seats)
 
     }
     catch (err) {
